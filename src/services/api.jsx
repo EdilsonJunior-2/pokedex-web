@@ -19,3 +19,8 @@ export async function getGeneration (generation) {
     const response = await api.get("generation/" + generation);
     return response.data;
 }
+
+export async function getTypeInfo (typeName) {
+    const response = await api.get("type/" + typeName);
+    return response.data;
+}

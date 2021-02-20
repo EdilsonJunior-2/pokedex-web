@@ -5,16 +5,13 @@ import {
     PokeBox,
     PokeName,
     PokeImg,
-    PokeType
 } from "../../styles/home";
+import { PokeType } from "../../styles/general";
+import { typeName } from "../../services/translator";
 
-// import { Container } from './styles';
-
-function Home() {
+const Home = () => {
 
     const [pokemonList, setPokemonList] = useState([]);
-    //    const limit = 24;
-    //    const offset = 0;
     const generation = 2;
 
     function getAllPokemon() {
@@ -42,7 +39,6 @@ function Home() {
     }
 
     useEffect(() => getAllPokemon(), []);
-    console.log(window.location.pathname);
 
     return (
         <PokeList>
@@ -57,7 +53,14 @@ function Home() {
                         </div>
                         <div>
                             {pokemon.types.map(type => (
-                                <PokeType type={type.type.name}>{type.type.name}</PokeType>
+                                <PokeType
+                                    type={type.type.name}
+                                    to={{
+                                        pathname: `/type/${type.type.name}`
+                                    }}
+                                >
+                                    <p>{typeName(type.type.name)}</p>
+                                </PokeType>
                             ))}
                         </div>
                     </PokeBox>
